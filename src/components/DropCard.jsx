@@ -19,14 +19,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const handleFilter = (id) => {};
 const DropCard = (props) => {
-  const [link, setLinks] = React.useState(false);
-
-  const handleLink = (e) => {
-    setLinks(!link);
-  };
-
   return (
     <div className="box">
       <div className="container">
@@ -76,15 +69,12 @@ const DropCard = (props) => {
             </div>
 
             <div className="middle">
-              <ExpandMore
-                expand={link}
-                onClick={handleLink}
-                aria-expanded={link}
-                aria-label="show more"
-              >
+              <ExpandMore>
                 <ExpandMoreIcon
+                  className="opneBTN"
                   onClick={() => {
-                    return props.setCode(props.id);
+                    props.handleOpen(props.id);
+                    props.setCode(props.id);
                   }}
                   style={{ color: "#212529" }}
                 />
@@ -92,8 +82,8 @@ const DropCard = (props) => {
             </div>
           </div>
         </div>
-        {props.setOpen(link)}
-        {link && (
+
+        {props.open[props.code] && props.code === props.id && (
           <div className={`collapse`}>
             <div className="one"> {props.text}</div>
           </div>
